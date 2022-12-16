@@ -1,0 +1,25 @@
+-- Discord: https://discord.gg/K6JDqbwgc8
+-- No touchey touchey
+
+while true do
+local lplr = game.Players.LocalPlayer
+local char = lplr.Character
+local originalPlayerPosition = char.HumanoidRootPart.Position
+local mouse = lplr:GetMouse()
+
+local function onButton1Down()
+      local result = mouse.Target
+      originalPlayerPosition = char.HumanoidRootPart.Position
+      if not result.Parent:FindFirstChild("Root") then
+            return
+      end
+      if result.Parent.Root then
+            char.HumanoidRootPart.CFrame = CFrame.new(result.Parent.Root.Position)
+            task.wait(0.2)
+            game:GetService("ReplicatedStorage").Events.PickUp:FireServer(result.Parent.Parent)
+      end
+end
+
+mouse.Button1Down:Connect(onButton1Down)
+wait(0.6)
+end
